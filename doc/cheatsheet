@@ -1,0 +1,9 @@
+gateway.resourcefile.dir.path
+
+/etc/iapi/{<Context Root>-api}
+
+http://localhost:8080/rest/config/reset
+http://localhost:8080/rest/doc/index.html
+
+
+sudo /usr/local/mysql/bin/mysqld_safe

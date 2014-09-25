@@ -1,0 +1,21 @@
+gateway.resourcefile.dir.path
+
+/etc/iapi/{<Context Root>-api}
+
+http://localhost:8080/rest/config/reset
+http://localhost:8080/rest/doc/index.html
+http://localhost:8080/rest/userprojecthours/termTotal/2927/2014012/2014071 ->19
+http://localhost:8080/rest/userprojecthours/termTotal/forParent/2725/2014012/2014071 -> 113
+http://localhost:8080/rest/version
+http://localhost:8080/rest/monthtoweekday/count
+
+
+curl -H "Accept:application/json" http://localhost:8080/dashboard/rest/monthtoweekday/1
+curl -H "Accept:application/json" http://localhost:8080/rest/monthtoweekday/1
+
+http://dashboard.marviq.net/rest/doc/index.html
+http://dashboard.marviq.net/rest/userprojecthours/termTotal/2927/2014012/2014071
+http://dashboard.marviq.net/rest/userprojecthours/termTotal/forParent/3007/2014012/2014071
+http://dashboard.marviq.net/rest/version
+
+@genereratedvalue strategy=

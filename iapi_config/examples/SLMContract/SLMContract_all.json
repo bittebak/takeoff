@@ -1,0 +1,20 @@
+[
+    {
+        "accountManager": "Bram Lokers",
+        "description": "Click & Claim SLA",
+        "hoursBudget": 100,
+        "id": 1,
+        "name": "Click & Claim",
+        "projectId": 2725,
+        "techLead": "Emiel van den Herberg"
+    },
+    {
+        "accountManager": "Björn Bruggink",
+        "description": "Pioneer Code Maintenance SLA",
+        "hoursBudget": 80,
+        "id": 2,
+        "name": "Pioneer",
+        "projectId": 1315,
+        "techLead": "David Bouwman"
+    }
+]

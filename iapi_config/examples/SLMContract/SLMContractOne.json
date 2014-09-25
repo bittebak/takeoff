@@ -1,0 +1,9 @@
+{
+    "accountManager": "Bram Lokers",
+    "description": "Click & Claim SLA",
+    "hoursBudget": 100,
+    "id": 1,
+    "name": "Click & Claim",
+    "projectId": 2725,
+    "techLead": "Emiel van den Herberg"
+}
