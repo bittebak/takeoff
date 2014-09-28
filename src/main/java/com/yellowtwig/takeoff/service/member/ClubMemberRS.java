@@ -1,14 +1,13 @@
-package com.yellowtwig.takeoff.service.identitymanager;
-
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * YellowTwig 2014
  */
+package com.yellowtwig.takeoff.service.member;
+
+
 
 import com.marviq.service.jersey.RestResource;
+import com.yellowtwig.takeoff.persistance.dataservice.member.ClubMemberDS;
 import com.yellowtwig.takeoff.persistance.ClubMember;
-import com.yellowtwig.takeoff.persistance.dataservice.identitymanager.ClubMemberDataService;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -26,10 +25,10 @@ import javax.ws.rs.Produces;
  */
 //@Stateless
 @Path("member")
-public class ClubMemberServiceRest extends RestResource {
+public class ClubMemberRS extends RestResource {
     
-    @EJB(name = "ClubMemberDataService")
-    private ClubMemberDataService dataService;
+    @EJB(name = "ClubMemberDS")
+    private ClubMemberDS dataService;
 
     @POST
     @Consumes({"application/xml", "application/json"})
@@ -76,7 +75,7 @@ public class ClubMemberServiceRest extends RestResource {
         return String.valueOf(getDataService().count());
     }
 
-    ClubMemberDataService getDataService(){
+    ClubMemberDS getDataService(){
         return dataService;
     }
     

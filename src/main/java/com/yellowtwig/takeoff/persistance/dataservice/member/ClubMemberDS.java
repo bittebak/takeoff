@@ -1,11 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * YellowTwig 2014
  */
-
-package com.yellowtwig.takeoff.persistance.dataservice.identitymanager;
-
+package com.yellowtwig.takeoff.persistance.dataservice.member;
 
 import com.yellowtwig.takeoff.persistance.ClubMember;
 import javax.ejb.Stateless;
@@ -14,8 +10,8 @@ import javax.ejb.Stateless;
  *
  * @author marcprive
  */
-@Stateless(name="ClubMemberDataService")
-public class ClubMemberDataService extends DataServiceIdentityManager<ClubMember>{
+@Stateless(name="ClubMemberDS")
+public class ClubMemberDS extends DataService<ClubMember>{
     
     @Override
     public Class getEntityType() {
