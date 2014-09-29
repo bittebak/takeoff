@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    Document   : api-api.xml
-    Created on : December 13, 2013
-    Author     : Navid Allahverdi
-    Description: This documentation is used to configure the service gateway module for eZorg SecureMessaging portal API.
+    Document   : rest-api.xml
+    Created on : September 25, 2014
+    Author     : Marc Geelen
+    Description: This documentation is used to configure the service gateway module for takeoff API.
     $Id: $
 -->
 
-<gateway baseGatewayUrl="/rest" name="-Board" techContact="MarcG" apiVersion="0.1" logo="resources/dashboard_logo.png">
+<gateway  name="-Board" techContact="MarcG" apiVersion="0.1" logo="resources/dashboard_logo.png">
     <doc>
         <![CDATA[
             <p>
-                Marviq Dashboard API.
+                Takeofff API.
             </p>
         ]]>
     </doc>
@@ -26,55 +26,34 @@
 
     <serviceCategories>
         <category>
-            <name>MyTime</name>
+            <name>Identity</name>
             <doc>
                 <![CDATA[
                     <p>
-                        MyTime services [Read-only].
+                        Takeoff services.
                     </p>
                 ]]>
             </doc>
         </category>
         
-        <category>
-            <name>MyTimeUtil</name>
-            <doc>
-                <![CDATA[
-                    <p>
-                        Util services. Not connected to any database.
-                    </p>
-                ]]>
-            </doc>
-        </category>
         
-        <category>
-            <name>Config</name>
-            <doc>
-                <![CDATA[
-                    <p>
-                        Dashboard configuration services
-                    </p>
-                ]]>
-            </doc>
-        </category>
     </serviceCategories>
+    <identityManagement>
+        <loginModule>
+            <serviceUrl>/idp/authenticate</serviceUrl>
+
+        </loginModule>
+    </identityManagement>
    
     <sessionCache>
-<!--        <sessionItem>
-            <name>language</name>
-            <doc>The preferred language of the user</doc>
-            <serviceUrl>/rest/userprofile/foraccount/{userid}</serviceUrl>
-            <xpath>/userProfile/Language/@languageId</xpath>
-            <expiry>600</expiry>
-        </sessionItem>
--->    </sessionCache>
+    </sessionCache>
 
     <httpHeaderRewrites>
         
     </httpHeaderRewrites>
 
     <api>
-        <service category="MyTime" anonymousAccessAllowed="true">
+        <service category="Identity" anonymousAccessAllowed="true">
             <name>Get version info</name>
             <doc>
                 <![CDATA[
@@ -101,145 +80,16 @@
             </output>
         </service>
          
-        <service category="MyTime" anonymousAccessAllowed="true">
-            <name>Term totals</name>
+    <service category="Identity" anonymousAccessAllowed="true">
+            <name>Get member</name>
             <doc>
                 <![CDATA[
-                    Get total hours for a project, all descendants -if any- are included.
+                    Retrieves information a member.
                 ]]>
             </doc>
             <method>GET</method>
-            <gatewayUrl>/userprojecthours/termtotal</gatewayUrl>
-            <serviceUrl>/userprojecthours/termtotal</serviceUrl>
-            <input>
-                <doc>
-                    <![CDATA[
-                        URL params: 
-                            projectid
-                            from - from date (border inclusive) yyyywwd
-                            to - to date (border inclusive) yyyywwd
-                    ]]>
-                </doc>
-            </input>
-            <output>
-                <doc>
-                    <![CDATA[
-                        [text/plain]
-                        Total hours for the project and all descendants
-                    ]]>
-                </doc>
-            </output>
-        </service>
-        
-        
-        <service category="MyTimeUtil" anonymousAccessAllowed="true">
-            <name>Day to Date as String</name>
-            <doc>
-                <![CDATA[
-                    Convert a MyTime Day format to normal date string.
-                    Header : 
-                    Accept 
-                        plain/text
-                ]]>
-            </doc>
-            <method>GET</method>
-            <gatewayUrl>/date/{day}</gatewayUrl>
-            <serviceUrl>/date/{day}</serviceUrl>
-            <input>
-                <doc>
-                    <![CDATA[
-                    The MyTime representation of a day:
-                         day = yyyywwd
-                    ]]>
-                </doc>
-            </input>
-            <output>
-                <doc>
-                    <![CDATA[
-                        [text/plain]
-                        Formatted date: yyyy-MM-dd
-                    ]]>
-                </doc>
-            </output>
-        </service>
-        
-        sadf
-        <service category="MyTimeUtil" anonymousAccessAllowed="true">
-            <name>Day to Date</name>
-            <doc>
-                <![CDATA[
-                    Convert a MyTime Day format to a date object.
-                    Header : 
-                    Accept 
-                        application/json
-                        application/xml
-                ]]>
-            </doc>
-            <method>GET</method>
-            <gatewayUrl>/date/{day}</gatewayUrl>
-            <serviceUrl>/date/{day}</serviceUrl>
-            <input>
-                <doc>
-                    <![CDATA[
-                    The MyTime representation of a day:
-                         day = yyyywwd
-                    ]]>
-                </doc>
-            </input>
-            <output>
-                <doc>
-                    <![CDATA[
-                        Date object
-                        - year
-                        - month
-                        - day
-                        
-                    ]]>
-                </doc>
-            </output>
-        </service>
-        asfd
-        
-        
-        
-        <service category="Config" anonymousAccessAllowed="true">
-            <name>Get all MonthToWeekday items</name>
-            <doc>
-                <![CDATA[
-                    Get the nr of stored terms.
-                ]]>
-            </doc>
-            <method>GET</method>
-            <gatewayUrl>/monthtoweekday/all</gatewayUrl>
-            <serviceUrl>/monthtoweekday/</serviceUrl>
-            <input>
-                <doc>
-                    <![CDATA[
-                        Depricated. Use version without /all
-                    ]]>
-                </doc>
-            </input>
-            <output>
-                <doc>
-                    <![CDATA[
-                        application/json]
-                        List of monthtoweekday records.
-                    ]]>
-                </doc>
-                 <example>examples/monthtoweekday/monthtoweekdays.json</example>
-            </output>
-        </service>
-        
-        <service category="Config" anonymousAccessAllowed="true">
-            <name>Get all MonthToWeekday items</name>
-            <doc>
-                <![CDATA[
-                    Get all stored terms.
-                ]]>
-            </doc>
-            <method>GET</method>
-            <gatewayUrl>/monthtoweekday/</gatewayUrl>
-            <serviceUrl>/monthtoweekday/</serviceUrl>
+            <gatewayUrl>/member</gatewayUrl>
+            <serviceUrl>/member</serviceUrl>
             <input>
                 <doc>
                     <![CDATA[
@@ -250,295 +100,41 @@
             <output>
                 <doc>
                     <![CDATA[
-                        application/json]
-                        List of monthtoweekday records.
-                    ]]>
-                </doc>
-                 <example>examples/monthtoweekday/monthtoweekdays.json</example>
-            </output>
-        </service>
-        
-        <service category="Config" anonymousAccessAllowed="true">
-            <name>The number of terms stored</name>
-            <doc>
-                <![CDATA[
-                    Get the nr of stored terms.
-                ]]>
-            </doc>
-            <method>GET</method>
-            <gatewayUrl>/monthtoweekday/count</gatewayUrl>
-            <serviceUrl>/monthtoweekday/count</serviceUrl>
-            <input>
-                <doc>
-                    <![CDATA[
-                        None.
-                    ]]>
-                </doc>
-            </input>
-            <output>
-                <doc>
-                    <![CDATA[
-                        [text/plain]
-                        Nr of monthtoweekday records in the table.
+                        [Application/json]
+                        version info.
                     ]]>
                 </doc>
             </output>
-        </service>
-        
-        <service category="Config" anonymousAccessAllowed="true">
-            <name>Add Month to Weekday</name>
+        </service>   
+
+        <service category="Identity" anonymousAccessAllowed="true">
+            <name>Create member</name>
             <doc>
                 <![CDATA[
-                    Post e new element.
-                ]]>
-            </doc>
-            <method>POST</method>
-            <gatewayUrl>/monthtoweekday</gatewayUrl>
-            <serviceUrl>/monthtoweekday</serviceUrl>
-            <input>
-                <doc>
-                    <![CDATA[
-                        The monthtoweekday entity.
-                        Don't provide an id, this will be generated.
-                    ]]>
-                </doc>
-                 <example>examples/monthtoweekday/monthtoweekday_new.json</example>
-            </input>
-            <output>
-                <doc>
-                    <![CDATA[
-                        [application/json]
-                        The newly created monthtoweekday (with the id).
-                    ]]>
-                </doc>
-                <example>examples/monthtoweekday/monthtoweekday.json</example>
-            </output>
-        </service>
-        
-        <service category="Config" anonymousAccessAllowed="true">
-            <name>Update Month to Weekday</name>
-            <doc>
-                <![CDATA[
-                    Update entity.
+                    Retrieves information a member.
                 ]]>
             </doc>
             <method>PUT</method>
-            <gatewayUrl>/monthtoweekday/{id}</gatewayUrl>
-            <serviceUrl>/monthtoweekday/{id}</serviceUrl>
+            <gatewayUrl>/member</gatewayUrl>
+            <serviceUrl>/member</serviceUrl>
             <input>
                 <doc>
                     <![CDATA[
-                        The monthtoweekday entity.
-                        Don't provide an id, this will be generated.
-                    ]]>
-                </doc>
-                 <example>examples/monthtoweekday/monthtoweekday.json</example>
-            </input>
-            <output>
-                <doc>
-                    <![CDATA[
-                        [application/json]
-                        The update monthtoweekday.
-                    ]]>
-                </doc>
-                <example>examples/monthtoweekday/monthtoweekday.json</example>
-            </output>
-        </service>
-        
-        <service category="Config" anonymousAccessAllowed="true">
-            <name>Delete Month to Weekday</name>
-            <doc>
-                <![CDATA[
-                    Delete entity.
-                ]]>
-            </doc>
-            <method>DELETE</method>
-            <gatewayUrl>/monthtoweekday/{id}</gatewayUrl>
-            <serviceUrl>/monthtoweekday/{id}</serviceUrl>
-            <input>
-                <doc>
-                    <![CDATA[
-                        None.
-                    ]]>
+                        [Application/json]
+                        version info.
+                    ]]>                
                 </doc>
             </input>
             <output>
                 <doc>
                     <![CDATA[
-                        [application/json]
-                        The deleted entity.
+                        [Application/json]
+                        version info.
                     ]]>
                 </doc>
-                <example>examples/monthtoweekday/monthtoweekday.json</example>
             </output>
-        </service>
-        
-        decendants
-        
-        
-        
-        
-        <service category="Config" anonymousAccessAllowed="true">
-            <name>Get Month to Weekday</name>
-            <doc>
-                <![CDATA[
-                    Get mtw by Id.
-                ]]>
-            </doc>
-            <method>GET</method>
-            <gatewayUrl>/monthtoweekday/{id}</gatewayUrl>
-            <serviceUrl>/monthtoweekday/{id}</serviceUrl>
-            <input>
-                <doc>
-                    <![CDATA[
-                        None.
-                    ]]>
-                </doc>
-            </input>
-            <output>
-                <doc>
-                    <![CDATA[
-                        None.
-                    ]]>
-                </doc>
-                <example>examples/monthtoweekday/monthtoweekday.json</example>
-            </output>
-        </service>
-        
-         <service category="Config" anonymousAccessAllowed="true">
-            <name>Get all SLMContracts</name>
-            <doc>
-                <![CDATA[
-                    Get a list of Service Level Management Contracts.
-                ]]>
-            </doc>
-            <method>GET</method>
-            <gatewayUrl>/SLMContract</gatewayUrl>
-            <serviceUrl>/SLMContract</serviceUrl>
-            <input>
-                <doc>
-                    <![CDATA[
-                        None.
-                    ]]>
-                </doc>
-            </input>
-            <output>
-                <doc>
-                    <![CDATA[
-                        A list of SLMContract objects.
-                    ]]>
-                </doc>
-                <example>examples/SLMContract/SLMContract_all.json</example>
-            </output>
-        </service>
-        
-        <service category="Config" anonymousAccessAllowed="true">
-            <name>Get a SLMContract by id</name>
-            <doc>
-                <![CDATA[
-                    Get a list of Service Level Management Contracts.
-                ]]>
-            </doc>
-            <method>GET</method>
-            <gatewayUrl>/SLMContract/{id}</gatewayUrl>
-            <serviceUrl>/SLMContract/{id}</serviceUrl>
-            <input>
-                <doc>
-                    <![CDATA[
-                        None.
-                    ]]>
-                </doc>
-            </input>
-            <output>
-                <doc>
-                    <![CDATA[
-                        A SLMContract objects.
-                    ]]>
-                </doc>
-                <example>examples/SLMContract/SLMContractOne.json</example>
-            </output>
-        </service>
-        
-        <service category="Config" anonymousAccessAllowed="true">
-            <name>Add a SLMContract by id</name>
-            <doc>
-                <![CDATA[
-                    Get a list of Service Level Management Contracts.
-                ]]>
-            </doc>
-            <method>POST</method>
-            <gatewayUrl>/SLMContract</gatewayUrl>
-            <serviceUrl>/SLMContract</serviceUrl>
-            <input>
-                <doc>
-                    <![CDATA[
-                        SLMContract object.
-                    ]]>
-                </doc>
-            </input>
-            <output>
-                <doc>
-                    <![CDATA[
-                        The created SLMContract object.
-                    ]]>
-                </doc>
-                <example>examples/SLMContract/SLMContractOne.json</example>
-            </output>
-        </service>
-        
-        <service category="Config" anonymousAccessAllowed="true">
-            <name>Update a SLMContract by id</name>
-            <doc>
-                <![CDATA[
-                    Get a list of Service Level Management Contracts.
-                ]]>
-            </doc>
-            <method>PUT</method>
-            <gatewayUrl>/SLMContract/{id}</gatewayUrl>
-            <serviceUrl>/SLMContract/{id}</serviceUrl>
-            <input>
-                <doc>
-                    <![CDATA[
-                        SLMContract object.
-                    ]]>
-                </doc>
-            </input>
-            <output>
-                <doc>
-                    <![CDATA[
-                        The updated SLMContract object.
-                    ]]>
-                </doc>
-                <example>examples/SLMContract/SLMContractOne.json</example>
-            </output>
-        </service>
-        
-        <service category="Config" anonymousAccessAllowed="true">
-            <name>Delete a SLMContract by id</name>
-            <doc>
-                <![CDATA[
-                    Delete Contract
-                ]]>
-            </doc>
-            <method>DELETE</method>
-            <gatewayUrl>/SLMContract/{id}</gatewayUrl>
-            <serviceUrl>/SLMContract/{id}</serviceUrl>
-            <input>
-                <doc>
-                    <![CDATA[
-                        
-                    ]]>
-                </doc>
-            </input>
-            <output>
-                <doc>
-                    <![CDATA[
-                        The deleted SLMContract object.
-                    ]]>
-                </doc>
-                <example>examples/SLMContract/SLMContractOne.json</example>
-            </output>
-        </service>
+        </service>  
         
     </api>
+
 </gateway>
