@@ -23,11 +23,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "member")
 @XmlRootElement
 @NamedQueries({
+    
+    @NamedQuery(name = "ClubMember.findByUserName", query = "SELECT c FROM ClubMember c WHERE c.userName = ?1")})
+
+/*
+@NamedQueries({
     @NamedQuery(name = "ClubMember.findAll", query = "SELECT c FROM ClubMember c"),
     @NamedQuery(name = "ClubMember.findById", query = "SELECT c FROM ClubMember c WHERE c.id = :id"),
     @NamedQuery(name = "ClubMember.findByFirstname", query = "SELECT c FROM ClubMember c WHERE c.firstname = :firstname"),
     @NamedQuery(name = "ClubMember.findByLastname", query = "SELECT c FROM ClubMember c WHERE c.lastname = :lastname"),
+    @NamedQuery(name = "ClubMember.findByIdpUser", query = "SELECT c FROM ClubMember c WHERE c.userName = :idpuserid"),
     @NamedQuery(name = "ClubMember.findByNickname", query = "SELECT c FROM ClubMember c WHERE c.nickname = :nickname")})
+*/
 public class ClubMember implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,10 +48,14 @@ public class ClubMember implements Serializable {
     @Size(max = 45)
     @Column(name = "lastname")
     private String lastname;
+    
     @Size(max = 45)
     @Column(name = "nickname")
     private String nickname;
     
+     @NotNull
+    @Column(name = "username")
+    private String userName;
 
     public ClubMember() {
     }
@@ -108,6 +119,20 @@ public class ClubMember implements Serializable {
     @Override
     public String toString() {
         return "com.yellowtwig.ClubMember[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the userName
+     */
+    public String getIdentity() {
+        return userName;
+    }
+
+    /**
+     * @param identity the userName to set
+     */
+    public void setIdentity(String identity) {
+        this.userName = identity;
     }
     
 }

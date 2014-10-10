@@ -17,9 +17,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,12 +30,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "user")
 @XmlRootElement
+/*
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPasswordHash", query = "SELECT u FROM User u WHERE u.passwordHash = :passwordHash"),
     @NamedQuery(name = "User.findByCreateTime", query = "SELECT u FROM User u WHERE u.createTime = :createTime")})
+*/
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -66,6 +70,9 @@ public class User implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     
+    //The password will not be stored.
+    @Transient
+    private String password;
     
 
     public User() {
@@ -75,11 +82,7 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public User(String email, String username, String passwordHash) {
-        this.email = email;
-        this.username = username;
-        this.passwordHash = passwordHash;
-    }
+    
 
     public String getUsername() {
         return username;
@@ -99,6 +102,10 @@ public class User implements Serializable {
 
     public String getPasswordHash() {
         return passwordHash;
+    }
+    
+    public String getPassword() {
+        return password;
     }
     
     public boolean validatePassword(String password){

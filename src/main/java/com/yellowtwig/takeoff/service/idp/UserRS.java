@@ -22,7 +22,7 @@ import javax.ws.rs.QueryParam;
  *
  * @author marcprive
  */
-@Path("admin/user")
+@Path("idp/admin/user")
 public class UserRS extends  RestResource {
     
     @EJB(name = "UserDS")

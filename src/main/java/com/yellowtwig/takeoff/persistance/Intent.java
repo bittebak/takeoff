@@ -19,31 +19,29 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+
+
 /**
  *
  * @author marcprive
  */
 @Entity
-@Table(name = "event")
+@Table(name = "intent")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e"),
-    @NamedQuery(name = "Event.findById", query = "SELECT e FROM Event e WHERE e.id = :id"),
-    @NamedQuery(name = "Event.findByDate", query = "SELECT e FROM Event e WHERE e.date = :date"),
-    @NamedQuery(name = "Event.findByLastupdate", query = "SELECT e FROM Event e WHERE e.lastupdate = :lastupdate"),
-    @NamedQuery(name = "Event.findByCreated", query = "SELECT e FROM Event e WHERE e.created = :created"),
-    @NamedQuery(name = "Event.findByStarttime", query = "SELECT e FROM Event e WHERE e.starttime = :starttime"),
-    @NamedQuery(name = "Event.findByComment", query = "SELECT e FROM Event e WHERE e.comment = :comment")})
-public class Event implements Serializable {
+    
+    @NamedQuery(name = "Intent.findByIdForMember", query = "SELECT i FROM Intent i WHERE i.id = ?2 AND i.memberId = ?1")})
+
+public class Intent implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Integer id;
-    @Column(name = "date")
+    @Column(name = "actiondate")
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private Date actionDate;
     @Column(name = "lastupdate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastupdate;
@@ -56,12 +54,14 @@ public class Event implements Serializable {
     @Size(max = 200)
     @Column(name = "comment")
     private String comment;
+    @Column(name = "memberid")
+    private Integer memberId;
     
 
-    public Event() {
+    public Intent() {
     }
 
-    public Event(Integer id) {
+    public Intent(Integer id) {
         this.id = id;
     }
 
@@ -73,12 +73,12 @@ public class Event implements Serializable {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getActionDate() {
+        return actionDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setActionDate(Date date) {
+        this.actionDate = date;
     }
 
     public Date getLastupdate() {
@@ -126,10 +126,10 @@ public class Event implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Event)) {
+        if (!(object instanceof Intent)) {
             return false;
         }
-        Event other = (Event) object;
+        Intent other = (Intent) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -139,6 +139,20 @@ public class Event implements Serializable {
     @Override
     public String toString() {
         return "com.yellowtwig.Event[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the mebmerid
+     */
+    public Integer getMemberId() {
+        return memberId;
+    }
+
+    /**
+     * @param mebmerid the mebmerid to set
+     */
+    public void setMemberId(Integer mebmerid) {
+        this.memberId = mebmerid;
     }
     
 }

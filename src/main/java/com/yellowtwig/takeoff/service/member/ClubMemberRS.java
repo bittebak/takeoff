@@ -18,6 +18,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 /**
  *
@@ -56,13 +57,14 @@ public class ClubMemberRS extends RestResource {
     }
 
     @GET
-    @Path("{id}")
+    @Path("{username}")
     @Produces({"application/xml", "application/json"})
-    public ClubMember find(@PathParam("id") Integer id) {
-        return getDataService().find(id);
+    public ClubMember find(@PathParam("username") String id) {
+        return getMember(id);
     }
-
+    
     @GET
+    @Path("all")
     @Produces({"application/xml", "application/json"})
     public List<ClubMember> findAll() {
         return getDataService().getAll();
@@ -75,7 +77,12 @@ public class ClubMemberRS extends RestResource {
         return String.valueOf(getDataService().count());
     }
 
-    ClubMemberDS getDataService(){
+     private ClubMember getMember(String userName) {
+        return dataService.findUniqueResultForNamedQuery("ClubMember.findByUserName", userName);
+        
+    }
+    
+    private ClubMemberDS getDataService(){
         return dataService;
     }
     

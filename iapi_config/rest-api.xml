@@ -7,7 +7,7 @@
     $Id: $
 -->
 
-<gateway  name="-Board" techContact="MarcG" apiVersion="0.1" logo="resources/dashboard_logo.png">
+<gateway  name="takeoff" techContact="MarcG" apiVersion="0.1" logo="resources/dashboard_logo.png">
     <doc>
         <![CDATA[
             <p>
@@ -26,11 +26,44 @@
 
     <serviceCategories>
         <category>
-            <name>Identity</name>
+            <name>idp</name>
             <doc>
                 <![CDATA[
                     <p>
-                        Takeoff services.
+                        Identity management.
+                    </p>
+                ]]>
+            </doc>
+        </category>
+        
+         <category>
+            <name>general</name>
+            <doc>
+                <![CDATA[
+                    <p>
+                        General API services.
+                    </p>
+                ]]>
+            </doc>
+        </category>
+        
+        <category>
+            <name>takeoff</name>
+            <doc>
+                <![CDATA[
+                    <p>
+                        Takeoff application services.
+                    </p>
+                ]]>
+            </doc>
+        </category>
+        
+        <category>
+            <name>admin</name>
+            <doc>
+                <![CDATA[
+                    <p>
+                        Takeoff admin services.
                     </p>
                 ]]>
             </doc>
@@ -53,7 +86,7 @@
     </httpHeaderRewrites>
 
     <api>
-        <service category="Identity" anonymousAccessAllowed="true">
+        <service category="general" anonymousAccessAllowed="true">
             <name>Get version info</name>
             <doc>
                 <![CDATA[
@@ -80,7 +113,7 @@
             </output>
         </service>
          
-    <service category="Identity" anonymousAccessAllowed="true">
+    <service category="admin" anonymousAccessAllowed="true">
             <name>Get member</name>
             <doc>
                 <![CDATA[
@@ -88,7 +121,7 @@
                 ]]>
             </doc>
             <method>GET</method>
-            <gatewayUrl>/member</gatewayUrl>
+            <gatewayUrl>admin/member</gatewayUrl>
             <serviceUrl>/member</serviceUrl>
             <input>
                 <doc>
@@ -107,7 +140,7 @@
             </output>
         </service>   
 
-        <service category="Identity" anonymousAccessAllowed="true">
+        <service category="admin" anonymousAccessAllowed="true">
             <name>Create member</name>
             <doc>
                 <![CDATA[
@@ -115,7 +148,7 @@
                 ]]>
             </doc>
             <method>PUT</method>
-            <gatewayUrl>/member</gatewayUrl>
+            <gatewayUrl>/admin/member</gatewayUrl>
             <serviceUrl>/member</serviceUrl>
             <input>
                 <doc>
@@ -134,6 +167,114 @@
                 </doc>
             </output>
         </service>  
+        
+        <service category="takeoff" anonymousAccessAllowed="true">
+            <name>Get member</name>
+            <doc>
+                <![CDATA[
+                    Retrieves information a member.
+                ]]>
+            </doc>
+            <method>GET</method>
+            <gatewayUrl>/member</gatewayUrl>
+            <serviceUrl>/member/{userid}</serviceUrl>
+            <input>
+                <doc>
+                    <![CDATA[
+                        None.
+                    ]]>
+                </doc>
+            </input>
+            <output>
+                <doc>
+                    <![CDATA[
+                        [Application/json]
+                        version info.
+                    ]]>
+                </doc>
+            </output>
+        </service>
+        
+        <service category="takeoff" anonymousAccessAllowed="true">
+            <name>Get intent</name>
+            <doc>
+                <![CDATA[
+                    Retrieves information a member.
+                ]]>
+            </doc>
+            <method>GET</method>
+            <gatewayUrl>/intent/{id}</gatewayUrl>
+            <serviceUrl>/intent/{userid}/{id}</serviceUrl>
+            <input>
+                <doc>
+                    <![CDATA[
+                        None.
+                    ]]>
+                </doc>
+            </input>
+            <output>
+                <doc>
+                    <![CDATA[
+                        [Application/json]
+                        version info.
+                    ]]>
+                </doc>
+            </output>
+        </service>
+        
+        <service category="takeoff" anonymousAccessAllowed="true">
+            <name>Create intent</name>
+            <doc>
+                <![CDATA[
+                    Retrieves information a member.
+                ]]>
+            </doc>
+            <method>POST</method>
+            <gatewayUrl>/intent/</gatewayUrl>
+            <serviceUrl>/intent/{userid}</serviceUrl>
+            <input>
+                <doc>
+                    <![CDATA[
+                        None.
+                    ]]>
+                </doc>
+            </input>
+            <output>
+                <doc>
+                    <![CDATA[
+                        [Application/json]
+                        version info.
+                    ]]>
+                </doc>
+            </output>
+        </service>
+        
+        <service category="takeoff" anonymousAccessAllowed="true">
+            <name>Update intent</name>
+            <doc>
+                <![CDATA[
+                    Retrieves information a member.
+                ]]>
+            </doc>
+            <method>PUT</method>
+            <gatewayUrl>/intent/{id}</gatewayUrl>
+            <serviceUrl>/intent/{userid}/{id}</serviceUrl>
+            <input>
+                <doc>
+                    <![CDATA[
+                        None.
+                    ]]>
+                </doc>
+            </input>
+            <output>
+                <doc>
+                    <![CDATA[
+                        [Application/json]
+                        version info.
+                    ]]>
+                </doc>
+            </output>
+        </service>
         
     </api>
 

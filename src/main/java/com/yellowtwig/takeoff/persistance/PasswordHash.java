@@ -49,23 +49,26 @@ public class PasswordHash {
         return md5;
     }
 
-    //Add salt
+    //Generate a random salt.
+    //The salt will be represented in a HEX string.
     public static String generateSalt() {
         //Always use a SecureRandom generator
         byte[] salt = new byte[16];
         try {
             SecureRandom sr = SecureRandom.getInstance("SHA1PRNG", "SUN");
-        //Create array for salt
-
+       
             //Get a random salt
             sr.nextBytes(salt);
-            //return salt
-            String result = new String(salt);
+            
+            //Converts message digest value in base 16 (hex) 
+            String result = new BigInteger(1, salt).toString(16);
             return result;
         } catch (Exception ex) {
             //Generation of a randum numbe is not possible. Let's use the curren date and time.
             Date date = new Date();
-            return date.toString();
+            
+            String result = Integer.toHexString(date.hashCode());
+            return result;
         }
     }
 }
