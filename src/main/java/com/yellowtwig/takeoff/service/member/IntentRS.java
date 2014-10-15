@@ -11,6 +11,10 @@ import com.yellowtwig.takeoff.persistance.User;
 import com.yellowtwig.takeoff.persistance.dataservice.idp.UserDS;
 import com.yellowtwig.takeoff.persistance.dataservice.member.ClubMemberDS;
 import com.yellowtwig.takeoff.persistance.dataservice.member.IntentDS;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -39,7 +43,14 @@ public class IntentRS extends  RestResource {
     public Intent find(@PathParam("userName") String userName, @PathParam("intentId") Integer intentId) {
         ClubMember member = getMember(userName);
         return dataService.findFirstResultForNameQuery("Intent.findByIdForMember", member.getId(), intentId );
-       
+    }
+    
+    @GET
+    @Path("{userName}")
+    @Produces({"application/xml", "application/json"})
+    public List<Intent> findAllForMember(@PathParam("userName") String userName, @PathParam("intentId") Integer intentId) {
+        ClubMember member = getMember(userName);
+        return dataService.getAllWhere("memberId" , member.getId());
     }
     
     @POST
@@ -49,7 +60,10 @@ public class IntentRS extends  RestResource {
     public Intent create(Intent entity, @PathParam("username") String username) {
         ClubMember member = getMember(username);
         entity.setMemberId(member.getId());
+        entity.setCreated(Calendar.getInstance().getTime());
+        entity.setLastupdate(entity.getCreated());
         dataService.create(entity);
+        
         return entity;
     }
     
@@ -60,9 +74,10 @@ public class IntentRS extends  RestResource {
     public Intent edit(@PathParam("username") String username, @PathParam("intentId") Integer intentId, Intent entity) {
         ClubMember member = getMember(username);
         
-        dataService.find(intentId);
+        Intent oldIntent = dataService.findFirstResultForNameQuery("Intent.findByIdForMember", member.getId(), intentId );
+        entity.setId( oldIntent.getId()); 
         dataService.update(entity);
-        return entity;
+        return oldIntent;
     }
     
     private ClubMember getMember(String userName) {

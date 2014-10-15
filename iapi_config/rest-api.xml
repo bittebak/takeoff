@@ -113,7 +113,7 @@
             </output>
         </service>
          
-    <service category="admin" anonymousAccessAllowed="true">
+    <service category="admin" anonymousAccessAllowed="false">
             <name>Get member</name>
             <doc>
                 <![CDATA[
@@ -140,7 +140,7 @@
             </output>
         </service>   
 
-        <service category="admin" anonymousAccessAllowed="true">
+        <service category="admin" anonymousAccessAllowed="false">
             <name>Create member</name>
             <doc>
                 <![CDATA[
@@ -168,7 +168,7 @@
             </output>
         </service>  
         
-        <service category="takeoff" anonymousAccessAllowed="true">
+        <service category="takeoff" anonymousAccessAllowed="false">
             <name>Get member</name>
             <doc>
                 <![CDATA[
@@ -176,7 +176,7 @@
                 ]]>
             </doc>
             <method>GET</method>
-            <gatewayUrl>/member</gatewayUrl>
+            <gatewayUrl>/my/member</gatewayUrl>
             <serviceUrl>/member/{userid}</serviceUrl>
             <input>
                 <doc>
@@ -195,7 +195,7 @@
             </output>
         </service>
         
-        <service category="takeoff" anonymousAccessAllowed="true">
+        <service category="takeoff" anonymousAccessAllowed="false">
             <name>Get intent</name>
             <doc>
                 <![CDATA[
@@ -203,7 +203,7 @@
                 ]]>
             </doc>
             <method>GET</method>
-            <gatewayUrl>/intent/{id}</gatewayUrl>
+            <gatewayUrl>/intents/{id}</gatewayUrl>
             <serviceUrl>/intent/{userid}/{id}</serviceUrl>
             <input>
                 <doc>
@@ -222,15 +222,16 @@
             </output>
         </service>
         
-        <service category="takeoff" anonymousAccessAllowed="true">
-            <name>Create intent</name>
+        
+        <service category="takeoff" anonymousAccessAllowed="false">
+            <name>Get intents</name>
             <doc>
                 <![CDATA[
-                    Retrieves information a member.
+                    Get all intents for this member.
                 ]]>
             </doc>
-            <method>POST</method>
-            <gatewayUrl>/intent/</gatewayUrl>
+            <method>GET</method>
+            <gatewayUrl>/my/intents</gatewayUrl>
             <serviceUrl>/intent/{userid}</serviceUrl>
             <input>
                 <doc>
@@ -249,15 +250,43 @@
             </output>
         </service>
         
-        <service category="takeoff" anonymousAccessAllowed="true">
+        
+        <service category="takeoff" anonymousAccessAllowed="false">
+            <name>Create intent</name>
+            <doc>
+                <![CDATA[
+                    Create an intent. It will be assigned the the member.
+                ]]>
+            </doc>
+            <method>POST</method>
+            <gatewayUrl>/intents</gatewayUrl>
+            <serviceUrl>/intent/{userid}</serviceUrl>
+            <input>
+                <doc>
+                    <![CDATA[
+                        None.
+                    ]]>
+                </doc>
+            </input>
+            <output>
+                <doc>
+                    <![CDATA[
+                        [Application/json]
+                        The created intent
+                    ]]>
+                </doc>
+            </output>
+        </service>
+        
+        <service category="takeoff" anonymousAccessAllowed="false">
             <name>Update intent</name>
             <doc>
                 <![CDATA[
-                    Retrieves information a member.
+                    Update one of my own intents.
                 ]]>
             </doc>
             <method>PUT</method>
-            <gatewayUrl>/intent/{id}</gatewayUrl>
+            <gatewayUrl>/my/intents/{id}</gatewayUrl>
             <serviceUrl>/intent/{userid}/{id}</serviceUrl>
             <input>
                 <doc>
