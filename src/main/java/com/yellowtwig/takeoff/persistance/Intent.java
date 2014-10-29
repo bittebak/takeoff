@@ -140,7 +140,7 @@ public class Intent implements Serializable {
 
     @Override
     public String toString() {
-        return "com.yellowtwig.Event[ id=" + id + " ]";
+        return "com.yellowtwig.Intent[ id=" + id + " ]";
     }
 
     /**

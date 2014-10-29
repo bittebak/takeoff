@@ -17,12 +17,16 @@ import java.util.List;
 import java.util.logging.Level;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 /**
  *
@@ -75,9 +79,36 @@ public class IntentRS extends  RestResource {
         ClubMember member = getMember(username);
         
         Intent oldIntent = dataService.findFirstResultForNameQuery("Intent.findByIdForMember", member.getId(), intentId );
-        entity.setId( oldIntent.getId()); 
-        dataService.update(entity);
+
+        if( null != oldIntent){
+            //Copy non mutable information
+            entity.setId( oldIntent.getId()); 
+            entity.setMemberId(member.getId());
+            entity.setLastupdate(new Date());
+            entity.setCreated(oldIntent.getCreated());
+            //Should be replaced by date.now
+            entity.setLastupdate(oldIntent.getCreated());
+            dataService.update(entity);
+        }
+        else{
+            logAndReturn(Level.INFO, Status.NOT_FOUND,"Intent with id " + intentId + " does not exist"); 
+        }
+        return entity;
+    }
+    
+    @DELETE
+    @Path("{username}/{intentId}")
+    @Produces({"application/xml", "application/json"})
+    public Intent delete(@PathParam("username") String username, @PathParam("intentId") Integer intentId) {
+        ClubMember member = getMember(username);
+        
+        Intent oldIntent = dataService.findFirstResultForNameQuery("Intent.findByIdForMember", member.getId(), intentId );
+
+        if( null != oldIntent) {
+            dataService.delete(intentId);
+        }
         return oldIntent;
+        
     }
     
     private ClubMember getMember(String userName) {

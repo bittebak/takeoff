@@ -305,6 +305,32 @@
             </output>
         </service>
         
+        <service category="takeoff" anonymousAccessAllowed="false">
+            <name>Delte intent</name>
+            <doc>
+                <![CDATA[
+                    Delete one of my own intents.
+                ]]>
+            </doc>
+            <method>DELETE</method>
+            <gatewayUrl>/my/intents/{id}</gatewayUrl>
+            <serviceUrl>/intent/{userid}/{id}</serviceUrl>
+            <input>
+                <doc>
+                    <![CDATA[
+                        None.
+                    ]]>
+                </doc>
+            </input>
+            <output>
+                <doc>
+                    <![CDATA[
+                        [Application/json]
+                        The deleted intent.
+                    ]]>
+                </doc>
+            </output>
+        </service>
     </api>
 
 </gateway>
