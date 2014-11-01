@@ -11,10 +11,13 @@ import com.yellowtwig.takeoff.persistance.User;
 import com.yellowtwig.takeoff.persistance.dataservice.idp.UserDS;
 import com.yellowtwig.takeoff.persistance.dataservice.member.ClubMemberDS;
 import com.yellowtwig.takeoff.persistance.dataservice.member.IntentDS;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -24,6 +27,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
@@ -44,9 +48,52 @@ public class IntentRS extends  RestResource {
     @GET
     @Path("{userName}/{intentId}")
     @Produces({"application/xml", "application/json"})
-    public Intent find(@PathParam("userName") String userName, @PathParam("intentId") Integer intentId) {
+    public Intent findForUser(@PathParam("userName") String userName, @PathParam("intentId") Integer intentId) {
         ClubMember member = getMember(userName);
         return dataService.findFirstResultForNameQuery("Intent.findByIdForMember", member.getId(), intentId );
+    }
+    
+    @GET
+    @Path("bydate/{from}")
+    @Produces({"application/xml", "application/json"})
+    public List<Intent> find(@PathParam("from") String from ) {
+        
+        SimpleDateFormat simpleDateFormat;
+        Date date = null;
+        try{
+             simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+             date = simpleDateFormat.parse(from);
+        }
+        catch(Exception ex){
+        }
+        
+        if(null == date)
+        {
+            try{
+            simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            date = simpleDateFormat.parse(from);
+            }
+            catch(Exception ex)
+            {
+            }
+        }
+        //last effor. Strip the time
+        if(null == date) {
+            simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                date = simpleDateFormat.parse(from);
+            } catch (ParseException ex) {
+                Logger.getLogger(IntentRS.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        if(null != date){
+            return dataService.findByNamedQuery("Intent.findByActionDate", date );
+        } 
+        
+        
+        return null;
+        
     }
     
     @GET

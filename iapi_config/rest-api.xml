@@ -331,6 +331,33 @@
                 </doc>
             </output>
         </service>
+        
+        <service category="takeoff" anonymousAccessAllowed="false">
+            <name>Get a list of intents by date</name>
+            <doc>
+                <![CDATA[
+                    Get all intents after the specified date (?from=yyyy-MM-dd hh:mm).
+                ]]>
+            </doc>
+            <method>GET</method>
+            <gatewayUrl>/intents/bydate/{from}</gatewayUrl>
+            <serviceUrl>/intent/bydate/{from}</serviceUrl>
+            <input>
+                <doc>
+                    <![CDATA[
+                        None.
+                    ]]>
+                </doc>
+            </input>
+            <output>
+                <doc>
+                    <![CDATA[
+                        [Application/json]
+                        The deleted intent.
+                    ]]>
+                </doc>
+            </output>
+        </service>
     </api>
 
 </gateway>

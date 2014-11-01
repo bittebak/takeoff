@@ -22,6 +22,8 @@ public class ApplicationConfig extends ResourceConfig {
     public ApplicationConfig() {
         packages("com.yellowtwig.takeoff.service"); // that last one ensures the superior jackson json engine is used
 
+        
+        // register(MultiPartFeature.class);
         // request filters
         register(PreflightCorsFilter.class);
         register(JpaJerseyRequestFilter.class);

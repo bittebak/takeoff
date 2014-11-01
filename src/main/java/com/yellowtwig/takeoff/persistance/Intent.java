@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "intent")
 @XmlRootElement
 @NamedQueries({
-    
-    @NamedQuery(name = "Intent.findByIdForMember", query = "SELECT i FROM Intent i WHERE i.id = ?2 AND i.memberId = ?1")})
+    @NamedQuery(name = "Intent.findByIdForMember", query = "SELECT i FROM Intent i WHERE i.id = ?2 AND i.memberId = ?1"),
+    @NamedQuery(name = "Intent.findByActionDate", query = "SELECT i FROM Intent i WHERE i.actionDate >= ?1")})
 
 public class Intent implements Serializable {
     private static final long serialVersionUID = 1L;
