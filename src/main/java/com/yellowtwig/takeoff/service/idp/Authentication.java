@@ -4,7 +4,7 @@
 
 package com.yellowtwig.takeoff.service.idp;
 
-import com.marviq.service.jersey.RestResource;
+import com.yellowtwig.service.jersey.RestResource;
 import com.yellowtwig.takeoff.persistance.User;
 import com.yellowtwig.takeoff.persistance.dataservice.idp.UserDS;
 import javax.ejb.EJB;

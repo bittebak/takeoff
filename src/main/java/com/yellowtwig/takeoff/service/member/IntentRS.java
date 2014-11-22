@@ -4,7 +4,7 @@
 
 package com.yellowtwig.takeoff.service.member;
 
-import com.marviq.service.jersey.RestResource;
+import com.yellowtwig.service.jersey.RestResource;
 import com.yellowtwig.takeoff.persistance.ClubMember;
 import com.yellowtwig.takeoff.persistance.Intent;
 import com.yellowtwig.takeoff.persistance.User;

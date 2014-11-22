@@ -4,13 +4,13 @@
 
 package com.yellowtwig.takeoff.service.context;
 
-import com.marviq.service.jersey.jpa.JpaJerseyExceptionHandler;
-import com.marviq.service.jersey.jpa.JpaJerseyRequestFilter;
-import com.marviq.service.jersey.jpa.JpaJerseyResponseFilter;
-import com.marviq.service.jersey.PreflightCorsFilter;
+import com.yellowtwig.service.jersey.jpa.JpaJerseyExceptionHandler;
+import com.yellowtwig.service.jersey.jpa.JpaJerseyRequestFilter;
+import com.yellowtwig.service.jersey.jpa.JpaJerseyResponseFilter;
+import com.yellowtwig.service.jersey.PreflightCorsFilter;
 import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
-import com.marviq.service.jersey.CorsFilter;
+import com.yellowtwig.service.jersey.CorsFilter;
 
 /**
  * 
@@ -33,6 +33,7 @@ public class ApplicationConfig extends ResourceConfig {
 
         // response filters
         register(JpaJerseyResponseFilter.class);
-        register(CorsFilter.class);
+        //Cors is now part of the iAPI
+        //register(CorsFilter.class);
     }
 }

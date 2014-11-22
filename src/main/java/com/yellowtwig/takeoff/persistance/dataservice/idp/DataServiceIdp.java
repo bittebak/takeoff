@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author marcprive
  */
-public abstract class DataServiceIdp<T> extends com.marviq.persistance.jpa.DataService<T> {
+public abstract class DataServiceIdp<T> extends com.yellowtwig.persistance.jpa.DataService<T> {
 
     @PersistenceContext(unitName = "com.yellowtwig.takeoff.identitymanager")
     private EntityManager em;

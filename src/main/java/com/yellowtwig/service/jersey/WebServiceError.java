@@ -2,7 +2,7 @@
  * Copyright (c) Marviq 2014
  */
 
-package com.marviq.service.jersey;
+package com.yellowtwig.service.jersey;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

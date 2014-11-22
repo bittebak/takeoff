@@ -5,10 +5,11 @@ package com.yellowtwig.takeoff.service.member;
 
 
 
-import com.marviq.service.jersey.RestResource;
+import com.yellowtwig.service.jersey.RestResource;
 import com.yellowtwig.takeoff.persistance.dataservice.member.ClubMemberDS;
 import com.yellowtwig.takeoff.persistance.ClubMember;
 import java.util.List;
+import java.util.logging.Level;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,6 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -75,6 +77,27 @@ public class ClubMemberRS extends RestResource {
     @Produces("text/plain")
     public String countREST() {
         return String.valueOf(getDataService().count());
+    }
+    
+    /**
+     * Get the public form of the Member
+     * @param id
+     * @return
+     */
+    @GET
+    @Path("public/{id}")
+    @Produces("application/json")
+    public MemberPublic getPublic(@PathParam("id") Integer id) {
+        ClubMember entity = getDataService().get(id);
+        
+        if (null == entity) {
+            logAndReturn(Level.FINE, Response.Status.NOT_FOUND, "entity with id :" + id + "not found");
+            return null;
+        }
+        MemberPublic memberPublic = new MemberPublic();
+        
+        memberPublic.setNickname(entity.getNickname());
+        return memberPublic;
     }
 
      private ClubMember getMember(String userName) {

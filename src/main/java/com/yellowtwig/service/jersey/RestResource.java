@@ -2,7 +2,7 @@
  * Copyright (c) Marviq 2014
  */
 
-package com.marviq.service.jersey;
+package com.yellowtwig.service.jersey;
 
 import java.text.MessageFormat;
 import java.util.logging.Level;

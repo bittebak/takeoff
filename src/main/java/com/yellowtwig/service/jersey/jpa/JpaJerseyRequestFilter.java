@@ -2,7 +2,7 @@
  * Copyright (c) Marviq 2014
  */
 
-package com.marviq.service.jersey.jpa;
+package com.yellowtwig.service.jersey.jpa;
 
 import java.io.IOException;
 import java.util.logging.Level;

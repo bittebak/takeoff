@@ -21,6 +21,7 @@
             <name>default</name>
             <doc>Currently the one and only service application</doc>
             <baseServiceUrl>http://localhost:8080/takeoff/rest</baseServiceUrl>
+            <allowOriginAccess>*</allowOriginAccess>
         </domain>
     </serviceDomains>
 
@@ -358,6 +359,34 @@
                 </doc>
             </output>
         </service>
+        
+        <service category="takeoff" anonymousAccessAllowed="false">
+            <name>Get member</name>
+            <doc>
+                <![CDATA[
+                    Retrieves information a member.
+                ]]>
+            </doc>
+            <method>GET</method>
+            <gatewayUrl>/member/{id}</gatewayUrl>
+            <serviceUrl>/member/public/{id}</serviceUrl>
+            <input>
+                <doc>
+                    <![CDATA[
+                        None.
+                    ]]>
+                </doc>
+            </input>
+            <output>
+                <doc>
+                    <![CDATA[
+                        [Application/json]
+                        version info.
+                    ]]>
+                </doc>
+            </output>
+        </service>   
+        
     </api>
 
 </gateway>

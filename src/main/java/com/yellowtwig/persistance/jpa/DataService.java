@@ -2,7 +2,7 @@
  * Copyright (c) Marviq 2014
  */
 
-package com.marviq.persistance.jpa;
+package com.yellowtwig.persistance.jpa;
 
 //import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
