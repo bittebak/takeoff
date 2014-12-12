@@ -55,6 +55,7 @@ public class ClubMember implements Serializable {
      @NotNull
     @Column(name = "username")
     private String userName;
+     
 
     public ClubMember() {
     }

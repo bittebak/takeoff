@@ -413,6 +413,35 @@
             </output>
         </service>  
         
+          <service category="takeoff" anonymousAccessAllowed="false">
+            <name>Change my password</name>
+            <doc>
+                <![CDATA[
+                    Change the passord of the logged in user. 
+                    Provide the old and the new password.
+                ]]>
+            </doc>
+            <method>PUT</method>
+            <gatewayUrl>/my/password</gatewayUrl>
+            <serviceUrl>/idp/password/{userid}</serviceUrl>
+            <input>
+                <doc>
+                    <![CDATA[
+                        QueryParams oldPassowrd, newPassword
+                    ]]>
+                </doc>
+            </input>
+            <output>
+                <doc>
+                    <![CDATA[
+                        [Application/json]
+                        The User.
+                        A 409 - Conflict - if the old password is not correct.
+                    ]]>
+                </doc>
+            </output>
+        </service>  
+        
     </api>
 
 </gateway>

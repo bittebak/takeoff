@@ -51,7 +51,9 @@ public class UserRS extends  RestResource {
         dataService.update(entity);
         return entity;
     }
-    
+    /*
+     * Admin function
+    */
     @POST
     @Path("{id}/setPassword")
     @Produces({"application/xml", "application/json"})
@@ -61,4 +63,6 @@ public class UserRS extends  RestResource {
         dataService.update(user);
         return user;
     }
+    
+    
 }
