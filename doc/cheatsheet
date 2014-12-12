@@ -11,3 +11,6 @@ sudo /usr/local/mysql/bin/mysqld_safe
 
 
 
+INSERT INTO `lenticularis`.`user` (`username`, `email`, `passwordhash`, `create_time`, `salt`) VALUES ('johanijzermans', 'j.ij@hotmail.nl', 'asdf', '2014-11-23', 'asdf');
+
+sudo /usr/local/mysql/support-files/mysql.server stop

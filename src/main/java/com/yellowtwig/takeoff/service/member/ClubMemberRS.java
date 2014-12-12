@@ -104,6 +104,21 @@ public class ClubMemberRS extends RestResource {
         return dataService.findUniqueResultForNamedQuery("ClubMember.findByUserName", userName);
         
     }
+     
+    @PUT
+    @Path("nickname/{username}")
+    @Produces({"application/xml", "application/json"})
+    public ClubMember editPublic(@PathParam("username") String username, @QueryParam("nickname") String nickname)   {
+        ClubMember entity = getMember(username);
+        
+        if (null == entity) {
+            logAndReturn(Level.FINE, Response.Status.NOT_FOUND, "entity with id :" + username + "not found");
+            return null;
+        }
+        entity.setNickname(nickname);
+        getDataService().update(entity);
+        return entity;
+    }
     
     private ClubMemberDS getDataService(){
         return dataService;

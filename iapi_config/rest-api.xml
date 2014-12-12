@@ -4,7 +4,6 @@
     Created on : September 25, 2014
     Author     : Marc Geelen
     Description: This documentation is used to configure the service gateway module for takeoff API.
-    $Id: $
 -->
 
 <gateway  name="takeoff" techContact="MarcG" apiVersion="0.1" logo="resources/dashboard_logo.png">
@@ -386,6 +385,33 @@
                 </doc>
             </output>
         </service>   
+        
+        <service category="takeoff" anonymousAccessAllowed="false">
+            <name>Update my member info</name>
+            <doc>
+                <![CDATA[
+                    Query params : nickname.
+                ]]>
+            </doc>
+            <method>PUT</method>
+            <gatewayUrl>/my/member</gatewayUrl>
+            <serviceUrl>/member/nickname/{userid}</serviceUrl>
+            <input>
+                <doc>
+                    <![CDATA[
+                        None.
+                    ]]>
+                </doc>
+            </input>
+            <output>
+                <doc>
+                    <![CDATA[
+                        [Application/json]
+                        version info.
+                    ]]>
+                </doc>
+            </output>
+        </service>  
         
     </api>
 

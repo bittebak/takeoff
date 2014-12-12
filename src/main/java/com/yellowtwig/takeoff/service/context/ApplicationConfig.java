@@ -25,7 +25,7 @@ public class ApplicationConfig extends ResourceConfig {
         
         // register(MultiPartFeature.class);
         // request filters
-        register(PreflightCorsFilter.class);
+        //register(PreflightCorsFilter.class);
         register(JpaJerseyRequestFilter.class);
        
         // exception handlers
