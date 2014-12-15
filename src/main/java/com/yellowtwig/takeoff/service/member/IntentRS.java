@@ -7,8 +7,6 @@ package com.yellowtwig.takeoff.service.member;
 import com.yellowtwig.service.jersey.RestResource;
 import com.yellowtwig.takeoff.persistance.ClubMember;
 import com.yellowtwig.takeoff.persistance.Intent;
-import com.yellowtwig.takeoff.persistance.User;
-import com.yellowtwig.takeoff.persistance.dataservice.idp.UserDS;
 import com.yellowtwig.takeoff.persistance.dataservice.member.ClubMemberDS;
 import com.yellowtwig.takeoff.persistance.dataservice.member.IntentDS;
 import java.text.ParseException;
@@ -27,10 +25,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 /**
  *
@@ -131,10 +126,8 @@ public class IntentRS extends  RestResource {
             //Copy non mutable information
             entity.setId( oldIntent.getId()); 
             entity.setMemberId(member.getId());
-            entity.setLastupdate(new Date());
             entity.setCreated(oldIntent.getCreated());
-            //Should be replaced by date.now
-            entity.setLastupdate(oldIntent.getCreated());
+            entity.setLastupdate(Calendar.getInstance().getTime());
             dataService.update(entity);
         }
         else{

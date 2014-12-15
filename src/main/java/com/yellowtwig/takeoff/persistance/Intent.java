@@ -1,5 +1,7 @@
 /*
  * YellowTwig 2014
+ * Intent.java
+ * The JPA bean
  */
 
 package com.yellowtwig.takeoff.persistance;
@@ -17,7 +19,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -56,6 +57,9 @@ public class Intent implements Serializable {
     @Size(max = 200)
     @Column(name = "comment")
     private String comment;
+    @Size(max = 45)
+    @Column(name = "summary")
+    private String summary;
     @Column(name = "memberid")
     private Integer memberId;
     
@@ -155,6 +159,20 @@ public class Intent implements Serializable {
      */
     public void setMemberId(Integer mebmerid) {
         this.memberId = mebmerid;
+    }
+
+    /**
+     * @return the summary
+     */
+    public String getSummary() {
+        return summary;
+    }
+
+    /**
+     * @param summary the summary to set
+     */
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
     
 }

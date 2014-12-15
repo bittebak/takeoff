@@ -23,7 +23,7 @@ public class VersionService extends RestResource {
     @GET
     @Produces("text/plain")
     public String getVersion() {
-        String version = "Takeoff - Version 0.1 20141122";
+        String version = "Takeoff - Version 1.1 20141213";
         return version;
 //        final InputStream inputStream = context.getResourceAsStream("/META-INF/MANIFEST.MF");
 //        try {
