@@ -442,6 +442,63 @@
             </output>
         </service>  
         
+        <service category="idp" anonymousAccessAllowed="true">
+            <name>Request a new password</name>
+            <doc>
+                <![CDATA[
+                    Request a new password. A mail will be sent with a link.
+                ]]>
+            </doc>
+            <method>POST</method>
+            <gatewayUrl>/idp/password/forgot</gatewayUrl>
+            <serviceUrl>/idp/password/forgot</serviceUrl>
+            <input>
+                <doc>
+                    <![CDATA[
+                        QueryParams usnername, email
+                    ]]>
+                </doc>
+            </input>
+            <output>
+                <doc>
+                    <![CDATA[
+                        [text/plain]
+                        A message.
+                        A 409 - Conflict - username and email do not match.
+                    ]]>
+                </doc>
+            </output>
+        </service>  
+        
+        <service category="idp" anonymousAccessAllowed="true">
+            <name>Reset password</name>
+            <doc>
+                <![CDATA[
+                    Reset a password. 
+                ]]>
+            </doc>
+            <method>POST</method>
+            <gatewayUrl>/idp/password/reset</gatewayUrl>
+            <serviceUrl>/idp/password/reset</serviceUrl>
+            <input>
+                <doc>
+                    <![CDATA[
+                        [application/json]
+                        ResetPasswordRequest
+                    ]]>
+                </doc>
+            </input>
+            <output>
+                <doc>
+                    <![CDATA[
+                        [application/json]
+                        ResetPasswordRequestl
+                        A 404 - if the proviced data is incorrect.
+                    ]]>
+                </doc>
+            </output>
+        </service>  
+        
     </api>
 
 </gateway>
